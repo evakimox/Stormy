@@ -9,10 +9,12 @@ public class playerControl : MonoBehaviour {
     private float speed = 4f;
     public GameObject healthBar;
     public GameObject healthBarBase;
+    public GameObject torchFire;
     private Vector3 healthBarOffset;
     public float hp;
     public float fullHp;
     public float hpBarInitialLength;
+    public Vector2 torchFireInitialSize;
     // Use this for initialization
     void Start () {
         initTime = Time.time;
@@ -21,13 +23,15 @@ public class playerControl : MonoBehaviour {
         GetComponent<Rigidbody2D>().freezeRotation = true;
         hpBarInitialLength = healthBar.transform.localScale.x;
         healthBarOffset = healthBarBase.transform.position - transform.position;
+        torchFireInitialSize = torchFire.transform.localScale;
     }
 	
 	// Update is called once per frame
 	void Update () {
         movementControl();
         renderHealthBar();
-        if(hp <= 0) {
+        drawTorch();
+        if (hp <= 0) {
             die();
         }
     }
@@ -98,6 +102,16 @@ public class playerControl : MonoBehaviour {
             healthBar.transform.localScale = length;
         }
         healthBarBase.transform.position = transform.position + healthBarOffset;
+    }
+
+    void drawTorch()
+    {
+        if (hp >= 0) {
+            Vector2 fireSize;
+            float factor = (hp / fullHp);
+            fireSize = factor * torchFireInitialSize;
+            torchFire.transform.localScale = fireSize;
+        }
     }
 
     void die() {

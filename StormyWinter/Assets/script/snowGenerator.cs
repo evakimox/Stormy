@@ -27,8 +27,8 @@ public class snowGenerator : MonoBehaviour {
         {
             counter = interval;
             Vector2 createPosition = transform.position;
-            createPosition.x = createPosition.x - 16;
-            createPosition.x = createPosition.x + Random.Range(0, 32);
+            createPosition.x = createPosition.x - 10;
+            createPosition.x = createPosition.x + Random.Range(0, 20);
             GameObject snow = Instantiate(flurry, createPosition, Quaternion.identity);
             if (snow != null)
             {

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class snowFlake : MonoBehaviour {
     public float atk;
+    public GameObject steam;
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +23,8 @@ public class snowFlake : MonoBehaviour {
             Debug.Log("HP: " + hp);
             hp = hp - atk;
             other.gameObject.GetComponent<playerControl>().hp = hp;
+            GameObject steamGenerated = Instantiate(steam, transform.position, Quaternion.identity);
+            steamGenerated.transform.localScale = new Vector2(2f,2f);
             Destroy(gameObject);
         }
     }
