@@ -6,6 +6,7 @@ public class floorGenerator : MonoBehaviour {
 
     private int counter;
     public int interval;
+    public GameObject floorNorm;
     public GameObject floorIce;
     public GameObject floorWood;
 
@@ -25,9 +26,13 @@ public class floorGenerator : MonoBehaviour {
         if(counter <= 0) {
             counter = interval;
             Vector2 createPosition = transform.position;
-            GameObject type = floorIce;
-            if(Random.Range(0f,10f) > 7f) {
+            GameObject type = floorNorm;
+            float randomNumber = Random.Range(0f, 10f);
+            if ( randomNumber > 8f) {
                 type = floorWood;
+            }
+            else if (randomNumber < 3f) {
+                type = floorIce;
             }
             createPosition.y = createPosition.y - 6;
             createPosition.y = createPosition.y + Random.Range(0, 10);
